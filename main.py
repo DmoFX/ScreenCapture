@@ -132,15 +132,15 @@ class ScreenCapture(QMainWindow):
         # print("size: ",self.size(),self.frameGeometry().size())
 
     def pressed_btn_record(self):
-        print("pressed")
+        # print("pressed")
         self.btn_record.setIcon(QIcon("./icons/record_focused1.png"))
 
     def released_btn_record(self):
-        print("pressed")
+        # print("pressed")
         self.movie.start()
 
     def clicked_btn_record(self):
-        print("clicked")
+        # print("clicked")
         if self.is_recording is False:
             self.is_recording = True  # To prevent recording from interrupting.
             # QApplication.setOverrideCursor(QCursor(Qt.ArrowCursor))
@@ -181,7 +181,7 @@ class ScreenCapture(QMainWindow):
                 video_output.write(frame_rgb)
 
                 if self.stop_recording is True:
-                    print("end")
+                    # print("end")
                     # self.video_output.release()
                     break
                 key = cv.waitKey(1)  # Without this loop will be infinite.
@@ -209,7 +209,7 @@ class ScreenCapture(QMainWindow):
 
     def pressed_btn_screenshot(self):
         self.btn_screenshot.setIcon(QIcon("./icons/screenshot_focused1.png"))
-        print("Clicked screenshot.")
+        # print("Clicked screenshot.")
         # Create screenshots folder if not exist.
         img_folder_path = self.folder_path+"screenshots/"
         if os.path.isdir(img_folder_path) is False:
