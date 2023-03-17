@@ -1,12 +1,12 @@
 import sys,os
-from PyQt5.QtWidgets import QMainWindow, QMenuBar, QMenu, QStatusBar
-from PyQt5.QtCore import *
-from PyQt5 import QtCore
-from PyQt5.QtCore import Qt,QTimer
-from PyQt5.QtCore import QEvent
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QGuiApplication,QImageWriter
+from PySide2.QtWidgets import QMainWindow, QMenuBar, QMenu, QStatusBar
+from PySide2.QtCore import *
+from PySide2 import QtCore
+from PySide2.QtCore import Qt,QTimer
+from PySide2.QtCore import QEvent
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
+from PySide2.QtGui import QGuiApplication,QImageWriter
 import numpy as np
 import cv2 as cv
 import time
@@ -16,19 +16,19 @@ import mss
 
 
 class ScreenCapture(QMainWindow):
-    def __init__(self):
+    def __init__(self,folder_path,icons_path):
         super(ScreenCapture, self).__init__()
         self.initUI()
         # Variables
         self.old_geo = self.geometry()
         self.P = self.pos()
         self.resized = 0
-        self.folder_path = "D:/Docs/Work/Python/Projects/Output/ScreenCapture Output/"
-        self.icons_path = "./icons/"
+        self.folder_path = folder_path
+        self.icons_path = icons_path
         self.screenshot_counter = 0
         self.stop_recording = False
         self.is_recording = False
-        self.setGeometry(100,0,700,500)
+        # self.setGeometry(100,0,700,500)
 
 
     def initUI(self):
@@ -123,7 +123,9 @@ class ScreenCapture(QMainWindow):
 
         painter.setOpacity(1)
         # painter.setBrush(Qt.blue)
-        painter.setPen(QPen(Qt.white, 7))
+        pen = QPen(Qt.darkCyan, 5)
+        pen.setJoinStyle(Qt.RoundJoin)
+        painter.setPen(pen)
         w = int(self.size().width() * 1)
         h = int(self.size().height() * 1)
         painter.drawLines([QLine(0, 0, w, 0), QLine(w, 0, w, h), QLine(w, h, 0, h), QLine(0, h, 0, 0)]) 
@@ -254,8 +256,10 @@ class ScreenCapture(QMainWindow):
 
 
 app = QApplication(sys.argv)
+folder_path = "D:/Docs/Work/Python/Projects/Output/ScreenCapture Output/"
+icons_path = "./icons/"
 # Create the main window
-window = ScreenCapture()
+window = ScreenCapture(folder_path,icons_path)
 window.show()
 
 sys.exit(app.exec_())
